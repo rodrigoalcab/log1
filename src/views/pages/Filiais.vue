@@ -5,21 +5,23 @@
         <CCard>
           <CCardHeader>
             <strong>Cadastro de Filiais </strong>
+            <b-alert show dismissible v-for="(mensagem, index) in mensagens"
+                     :key="index"
+                     :variant="mensagem.tipo">{{ mensagem.texto }}</b-alert>
           </CCardHeader>
           <CCardBody>
             <CRow>
               <CCol sm="12">
-                <CInput label="userID" v-model="post.userId" />
-                <CInput label="ID" v-model="post.id" />
+                <CInput label="userId" v-model="post.userId" />
+                <CInput label="id" v-model="post.id" />
                 <CInput label="Title" v-model="post.title" />
                 <CInput label="Body" v-model="post.body" />
               </CCol>
-
             </CRow>
           </CCardBody>
           <CCardFooter style="text-align: right">
-            <CButton type="reset" size="sm" color="danger" style="margin: 0 8px 0 8px;" @click="limparPost"><CIcon name="cil-ban"/> Limpar</CButton>
-            <CButton type="submit" size="sm" color="success" style="margin: 0 8px 0 8px;"><CIcon name="cil-check-circle"/> Cadastrar</CButton>
+            <CButton type="reset" size="sm" color="danger" style="margin: 0 8px 0 8px;" @click="limpar"><CIcon name="cil-ban"/> Limpar</CButton>
+            <CButton type="submit" size="sm" color="success" style="margin: 0 8px 0 8px;" @click="salvar"><CIcon name="cil-check-circle"/> Salvar</CButton>
 
           </CCardFooter>
         </CCard>
@@ -35,12 +37,14 @@
           <CCardBody>
             <CRow>
               <CCol sm="12">
-                <div v-for="(post, id) in posts" :key="post.id">
+                <div v-for="(post, index) in posts" :key="index">
+                  <span><strong>userId:</strong> {{ post.userId }}</span><br>
                   <span><strong>ID:</strong> {{ post.id }}</span><br>
                   <span><strong>Title:</strong> {{ post.title }}</span><br>
                   <span><strong>Body:</strong> {{ post.body }}</span><br>
+                  <span><strong>INDEX:</strong> {{ index }}</span><br>
                   <b-button class="ml-2" variant="warning" @click="buscarUm(post.id)">Editar</b-button>
-                  <b-button class="ml-2" variant="danger">Excluir</b-button>
+                  <b-button class="ml-2" variant="danger" @click="excluir(post.id)">Excluir</b-button>
                   <hr>
                 </div>
               </CCol>
@@ -59,28 +63,67 @@ export default {
   name: 'Forms',
   data() {
     return {
-      posts: [],
-      post: {
 
+      mensagens: [],
+      posts: [],
+      id: null,
+      post: {
+        userId: '',
+        id: '',
+        title: '',
+        body: ''
       }
     }
   },
   methods: {
+    salvar() {
+      const metodo = this.id ? 'patch' : 'post'
+      const finalUrl = this.id ? '/posts/' + this.id : '/posts'
+      this.$http[metodo]('' + finalUrl, this.post)
+              .then(() => {
+                this.limpar()
+                this.mensagens.push({
+                  texto: 'Operação concluída com sucesso!',
+                  tipo: 'success'
+                })
+              })
+    },
+    excluir(id) {
+      this.$http.delete('/posts/' + id)
+              .then(() => {
+                this.limpar()
+                this.mensagens.push({
+                  texto: 'Post excluído com sucesso!',
+                  tipo: 'success'
+                })
+              })
+              .catch(err => {
+                this.mensagens.push({
+                  texto: 'Problema para excluir',
+                  tipo: 'danger'
+                })
+              })
+    },
     buscarUm(id) {
       this.$http.get('/posts/' + id).then(res => {
         this.post = res.data
-        console.log(this.post)
+        this.id = this.post.id
       })
     },
-    limparPost() {
-      this.post = ''
+    limpar() {
+      this.post.userId = ''
+      this.post.id = ''
+      this.post.title = ''
+      this.post.body = ''
+      this.id = null
     },
 
   },
-  mounted() {
+  created() {
     this.$http.get('/posts').then(res => {
       this.posts = res.data
     })
+
   }
 }
 </script>
