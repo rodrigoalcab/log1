@@ -17,6 +17,9 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import vuetify from '@/plugins/vuetify' // path to vuetify export
+
+
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
@@ -28,6 +31,7 @@ Vue.prototype.$log = console.log.bind(console)
 
 new Vue({
   el: '#app',
+  vuetify,
   router,
   store,
   icons,

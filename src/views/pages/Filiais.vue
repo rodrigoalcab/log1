@@ -37,19 +37,21 @@
           <CCardBody>
             <CRow>
               <CCol sm="12">
-                <div v-for="(post, index) in posts" :key="index">
-                  <span><strong>userId:</strong> {{ post.userId }}</span><br>
-                  <span><strong>ID:</strong> {{ post.id }}</span><br>
-                  <span><strong>Title:</strong> {{ post.title }}</span><br>
-                  <span><strong>Body:</strong> {{ post.body }}</span><br>
-                  <span><strong>INDEX:</strong> {{ index }}</span><br>
-                  <b-button class="ml-2" variant="warning" @click="buscarUm(post.id)">Editar</b-button>
-                  <b-button class="ml-2" variant="danger" @click="excluir(post.id)">Excluir</b-button>
-                  <hr>
-                </div>
+<!--                <div v-for="(post, index) in posts" :key="index">-->
+<!--                  <span><strong>userId:</strong> {{ post.userId }}</span><br>-->
+<!--                  <span><strong>ID:</strong> {{ post.id }}</span><br>-->
+<!--                  <span><strong>Title:</strong> {{ post.title }}</span><br>-->
+<!--                  <span><strong>Body:</strong> {{ post.body }}</span><br>-->
+<!--                  <span><strong>INDEX:</strong> {{ index }}</span><br>-->
+<!--                  <b-button class="ml-2" variant="warning" @click="buscarUm(post.id)">Editar</b-button>-->
+<!--                  <b-button class="ml-2" variant="danger" @click="excluir(post.id)">Excluir</b-button>-->
+<!--                  <hr>-->
+<!--                </div>-->
+               <DataTable :posts="posts" />
               </CCol>
             </CRow>
           </CCardBody>
+
 
         </CCard>
       </CCol>
@@ -59,7 +61,11 @@
 </template>
 
 <script>
+  import DataTable from '../datatable/DataTable';
+
 export default {
+  components: { DataTable },
+
   name: 'Forms',
   data() {
     return {
@@ -130,6 +136,6 @@ export default {
 
 <style>
   button {
-
+    color: #FFF !important;
   }
 </style>
