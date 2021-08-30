@@ -47,7 +47,10 @@
 <!--                  <b-button class="ml-2" variant="danger" @click="excluir(post.id)">Excluir</b-button>-->
 <!--                  <hr>-->
 <!--                </div>-->
-               <DataTable :posts="posts" />
+               <DataTable :posts="posts"
+               @itemParaEditar="buscarUm"
+               @itemParaExcluir="excluir"
+               />
               </CCol>
             </CRow>
           </CCardBody>
@@ -83,7 +86,7 @@ export default {
   },
   methods: {
     salvar() {
-      const metodo = this.id ? 'patch' : 'post'
+      const metodo = this.id ? 'put' : 'post'
       const finalUrl = this.id ? '/posts/' + this.id : '/posts'
       this.$http[metodo]('' + finalUrl, this.post)
               .then(() => {

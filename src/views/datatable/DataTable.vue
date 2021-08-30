@@ -8,7 +8,7 @@
                     <v-text-field
                             v-model="search"
                             append-icon="mdi-magnify"
-                            label="Search"
+                            label="Pesquisar"
                             single-line
                             hide-details
                     ></v-text-field>
@@ -18,12 +18,32 @@
                         :items="posts"
                         :items-per-page="5"
                         :search="search"
+                        :footer-props="{
+                        itemsPerPageText: 'Itens por página',
+                        'items-per-page-options': [5, 10, 20, 50, -1],
+                        'items-per-page-all-text': 'Tudo',
+                        pageText: '{0} - {1} de {2}'
+
+                        }"
+
                         class="elevation-1"
                 >
                     <template v-slot:item.actions="{item}">
                         <div style="display: flex;">
-                            <b-button variant="warning"><i class="fas fa-edit"></i></b-button>
-                            <b-button variant="danger" class="ml-2"><i class="fas fa-trash"></i></b-button>
+                            <v-icon
+                                    small
+                                    class="mr-3 md-dark"
+                                    @click="$emit('itemParaEditar', item.id)"
+                            >
+                                mdi-pencil
+                            </v-icon>
+                            <v-icon
+                                    small
+                                    class="md-dark"
+                                    @click="$emit('itemParaExcluir', item.id)"
+                            >
+                                mdi-delete
+                            </v-icon>
                         </div>
                     </template>
 
@@ -44,18 +64,21 @@
                     { text: "Id", value: "id" },
                     { text: "Title", value: "title" },
                     { text: "Body", value: "body" },
-                    { text: "", value: "actions", sortable: false },
+                    { text: "Ações", value: "actions", sortable: false },
                 ],
             }
         },
         methods: {
-            deleteItem() {
-                alert('deleting item...')
-            }
+
         }
     }
 </script>
 
 <style scoped>
+
+    .md-dark {
+        color: rgba(0, 0, 0, 0.54) !important;
+        font-size: 20px !important;
+    }
 
 </style>
