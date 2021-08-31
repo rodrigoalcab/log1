@@ -29,6 +29,7 @@ Vue.config.performance = true
 Vue.use(CoreuiVue)
 Vue.prototype.$log = console.log.bind(console)
 
+
 new Vue({
   el: '#app',
   vuetify,
