@@ -3,8 +3,21 @@
         <v-main>
             <v-container>
                 <v-card-title>
-                    Nutrition
+                    <v-btn
+                            color="success"
+                            dark
+                            class="mb-2"
+                            @click="$emit('xlsParaExportar')"
+                    ><i class="fas fa-file-excel mr-2 fa-lg"></i>
+                        Exportar XLS
+                    </v-btn>
+                    <v-divider
+                            class="mx-4"
+                            inset
+                            vertical
+                    ></v-divider>
                     <v-spacer></v-spacer>
+
                     <v-text-field
                             v-model="search"
                             append-icon="mdi-magnify"
@@ -26,7 +39,7 @@
 
                         }"
 
-                        class="elevation-1"
+                        class="elevation-2"
                 >
                     <template v-slot:item.actions="{item}">
                         <div style="display: flex;">
@@ -80,5 +93,6 @@
         color: rgba(0, 0, 0, 0.54) !important;
         font-size: 20px !important;
     }
+
 
 </style>

@@ -8,6 +8,7 @@
             <b-alert show dismissible v-for="(mensagem, index) in mensagens"
                      :key="index"
                      :variant="mensagem.tipo">{{ mensagem.texto }}</b-alert>
+
           </CCardHeader>
           <CCardBody>
             <CRow>
@@ -21,7 +22,7 @@
           </CCardBody>
           <CCardFooter style="text-align: right">
             <CButton type="reset" size="sm" color="danger" style="margin: 0 8px 0 8px;" @click="limpar"><CIcon name="cil-ban"/> Limpar</CButton>
-            <CButton type="submit" size="sm" color="success" style="margin: 0 8px 0 8px;" @click="salvar"><CIcon name="cil-check-circle"/> Salvar</CButton>
+            <CButton type="submit" size="sm" color="success" style="margin: 0 8px 0 8px;" @click="salvar" :disabled="desabilitado" ><CIcon name="cil-check-circle"/> Salvar</CButton>
 
           </CCardFooter>
         </CCard>
@@ -50,6 +51,7 @@
                <DataTable :posts="posts"
                @itemParaEditar="buscarUm"
                @itemParaExcluir="excluir"
+               @xlsParaExportar="exportarXls"
                />
               </CCol>
             </CRow>
@@ -72,7 +74,7 @@ export default {
   name: 'Forms',
   data() {
     return {
-
+      desabilitado: false,
       mensagens: [],
       posts: [],
       id: null,
@@ -86,10 +88,12 @@ export default {
   },
   methods: {
     salvar() {
+      this.desabilitaBotao()
       const metodo = this.id ? 'put' : 'post'
       const finalUrl = this.id ? '/posts/' + this.id : '/posts'
       this.$http[metodo]('' + finalUrl, this.post)
               .then(() => {
+                this.habilitaBotao()
                 this.limpar()
                 this.mensagens.push({
                   texto: 'Operação concluída com sucesso!',
@@ -98,6 +102,7 @@ export default {
               })
     },
     excluir(id) {
+      alert('Excluindo o registro...')
       this.$http.delete('/posts/' + id)
               .then(() => {
                 this.limpar()
@@ -126,7 +131,15 @@ export default {
       this.post.body = ''
       this.id = null
     },
-
+    exportarXls() {
+      alert('Exportando arquivo XLS...')
+    },
+    habilitaBotao() {
+      this.desabilitado = false;
+    },
+    desabilitaBotao() {
+      this.desabilitado = true;
+    }
   },
   created() {
     this.$http.get('/posts').then(res => {
@@ -141,4 +154,5 @@ export default {
   button {
     color: #FFF !important;
   }
+
 </style>
