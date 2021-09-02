@@ -21,8 +21,8 @@
             </CRow>
           </CCardBody>
           <CCardFooter style="text-align: right">
-            <CButton type="reset" size="sm" color="danger" style="margin: 0 8px 0 8px;" @click="limpar"><CIcon name="cil-ban"/> Limpar</CButton>
-            <CButton type="submit" size="sm" color="success" style="margin: 0 8px 0 8px;" @click="salvar" :disabled="desabilitado" ><CIcon name="cil-check-circle"/> Salvar</CButton>
+            <CButton type="reset" size="sm" color="danger" style="margin: 0 8px 0 8px;" class="botao-texto-branco" @click="limpar"><CIcon name="cil-ban"/> Limpar</CButton>
+            <CButton type="submit" size="sm" color="success" style="margin: 0 8px 0 8px;" class="botao-texto-branco" @click="salvar" :disabled="desabilitado" ><CIcon name="cil-check-circle"/> Salvar</CButton>
 
           </CCardFooter>
         </CCard>
@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style>
-  button {
+  .botao-texto-branco {
     color: #FFF !important;
   }
 

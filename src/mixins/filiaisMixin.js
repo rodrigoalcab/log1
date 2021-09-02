@@ -16,6 +16,14 @@ export default {
     methods: {
         salvar() {
             this.desabilitaBotao()
+            if(this.verificaObjetoVazio(this.post)) {
+                this.mensagens.push({
+                    texto: 'Há campos vazios!',
+                    tipo: 'danger'
+                })
+                this.habilitaBotao()
+                return
+            }
             const metodo = this.id ? 'put' : 'post'
             const finalUrl = this.id ? '/posts/' + this.id : '/posts'
             this.$http[metodo]('' + finalUrl, this.post)
