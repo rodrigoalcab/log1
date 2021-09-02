@@ -67,7 +67,7 @@
 
 <script>
   import filiaisMixin from '@/mixins/filiaisMixin';
-import DataTable from '../datatable/DataTable';
+  import DataTable from '../datatable/DataTable';
 
 
 export default {
