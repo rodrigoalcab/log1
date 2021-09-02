@@ -6,7 +6,7 @@ import CoreuiVue from '@coreui/vue'
 import { iconsSet as icons } from './assets/icons/icons.js'
 import store from './store'
 import './plugins/axios'
-import vuetify from './plugins/vuetify' // path to vuetify export
+
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 
@@ -19,6 +19,7 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
+import vuetify from './plugins/vuetify' // path to vuetify export
 
 Vue.config.performance = true
 Vue.use(CoreuiVue)
