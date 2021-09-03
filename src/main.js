@@ -28,18 +28,16 @@ Vue.prototype.$log = console.log.bind(console)
 
 Vue.mixin({
   methods: {
-    verificaObjetoVazio(objeto){
-      var campoVazio = 0
-      for(var key in objeto) {
-        if(objeto[key] === "") {
-           campoVazio++
-        }
-      }
-      if(campoVazio > 0) {
-        return true
-      } else {
-        return false
-      }
+    newMessage(array, content, variant) {
+        array.push({
+        text: content,
+        type: variant
+      })
+    },
+    clearFields(object) {
+      Object.keys(object).forEach(key => {
+         object[key] = '';
+      })
     }
   }
 })

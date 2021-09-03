@@ -1,8 +1,8 @@
 export default {
     data() {
         return {
-            desabilitado: false,
-            mensagens: [],
+            saveButtonDisabled: false,
+            messages: [],
             posts: [],
             id: null,
             post: {
@@ -14,91 +14,59 @@ export default {
         }
     },
     methods: {
-        salvar() {
-            this.desabilitaBotao()
-            if(this.verificaObjetoVazio(this.post)) {
-                this.mensagens.push({
-                    texto: 'Há campos vazios!',
-                    tipo: 'danger'
-                })
-                this.habilitaBotao()
-                return
-            }
-            
-            const metodo = this.id ? 'put' : 'post'
+        save() {
+            this.disableButton()
+            const method = this.id ? 'put' : 'post'
             const finalUrl = this.id ? '/posts/' + this.id : '/posts'
             
-            this.$http[metodo]('' + finalUrl, this.post)
+            this.$http[method]('' + finalUrl, this.post)
                 .then(response => {
 
-                    this.habilitaBotao()
+                    this.enableButton()
 
                     if(response.status == 200 || response.status == 201) {
-                        
-                        this.mensagens.push({
-                            texto: 'Operação concluída com sucesso!',
-                            tipo: 'success'
-                        })
-
-                    } else {
-                        this.mensagens.push({
-                            texto: response.body.retorno,
-                            tipo: 'error'
-                        })
+                        this.newMessage(this.messages, 'Operação concluída com sucesso!', 'success')
                     }
 
-                    this.limpar()
+                    this.clearFields(this.post)
                     
-                }).catch( err => {
-                    this.mensagens.push({
-                        texto: 'Problema para excluir',
-                        tipo: 'danger'
-                    })
+                }).catch( error => {
+                    this.newMessage(this.messages, 'Problema para excluir!', 'danger')
+                console.log(error)
                 })
         },
 
-        excluir(id) {
-            alert('Excluindo o registro...')
+        remove(id) {
             this.$http.delete('/posts/' + id)
                 .then(() => {
-                    this.limpar()
-                    this.mensagens.push({
-                        texto: 'Post excluído com sucesso!',
-                        tipo: 'success'
-                    })
-                }).catch( err => {
-                    this.mensagens.push({
-                        texto: 'Problema para excluir',
-                        tipo: 'danger'
-                    })
+                    this.clearFields(this.post)
+                    this.newMessage(this.messages, 'Post excluído com sucesso', 'danger')
+                }).catch( error => {
+                    this.newMessage(this.messages, 'Erro ao tentar excluir', 'danger')
+                console.log(error)
                 })
         },
 
-        buscarUm(id) {
-            this.$http.get('/posts/' + id).then(res => {
+        getOne(id) {
+            this.$http.get('/posts/' + id)
+                .then(res => {
                 this.post = res.data
                 this.id = this.post.id
+            }).catch( error => {
+                console.log(error)
             })
         },
 
-        limpar() {
-            this.post.userId = ''
-            this.post.id = ''
-            this.post.title = ''
-            this.post.body = ''
-            this.id = null
-        },
-
-        exportarXls() {
+        exportXLS() {
             alert('Exportando arquivo XLS...')
         },
 
-        habilitaBotao() {
-            this.desabilitado = false;
+        enableButton() {
+            this.saveButtonDisabled = false;
         },
 
-        desabilitaBotao() {
-            this.desabilitado = true;
+        disableButton() {
+            this.saveButtonDisabled = true;
         }
     },
 

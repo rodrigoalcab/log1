@@ -5,9 +5,9 @@
         <CCard>
           <CCardHeader>
             <strong>Cadastro de Filiais </strong>
-            <b-alert show dismissible v-for="(mensagem, index) in mensagens"
+            <b-alert show dismissible v-for="(message, index) in messages"
                      :key="index"
-                     :variant="mensagem.tipo">{{ mensagem.texto }}</b-alert>
+                     :variant="message.type">{{ message.text }}</b-alert>
 
           </CCardHeader>
           <CCardBody>
@@ -21,8 +21,8 @@
             </CRow>
           </CCardBody>
           <CCardFooter style="text-align: right">
-            <CButton type="reset" size="sm" color="danger" style="margin: 0 8px 0 8px;" class="botao-texto-branco" @click="limpar"><CIcon name="cil-ban"/> Limpar</CButton>
-            <CButton type="submit" size="sm" color="success" style="margin: 0 8px 0 8px;" class="botao-texto-branco" @click="salvar" :disabled="desabilitado" ><CIcon name="cil-check-circle"/> Salvar</CButton>
+            <CButton type="reset" size="sm" color="danger" style="margin: 0 8px 0 8px;" class="botao-texto-branco" @click="clearFields(post)"><CIcon name="cil-ban"/> Limpar</CButton>
+            <CButton type="submit" size="sm" color="success" style="margin: 0 8px 0 8px;" class="botao-texto-branco" @click="save" :disabled="saveButtonDisabled" ><CIcon name="cil-check-circle"/> Salvar</CButton>
 
           </CCardFooter>
         </CCard>
@@ -49,9 +49,9 @@
 <!--                  <hr>-->
 <!--                </div>-->
                <DataTable :posts="posts"
-               @itemParaEditar="buscarUm"
-               @itemParaExcluir="excluir"
-               @xlsParaExportar="exportarXls"
+               @itemParaEditar="getOne"
+               @itemParaExcluir="remove"
+               @xlsParaExportar="exportXLS"
                />
               </CCol>
             </CRow>
