@@ -3,28 +3,43 @@
         <v-main>
             <v-container>
                 <v-card-title>
-                    <v-btn
-                            color="success"
-                            dark
-                            class="mb-2"
-                            @click="$emit('xlsParaExportar')"
-                    ><i class="fas fa-file-excel mr-2 fa-lg"></i>
-                        Exportar XLS
-                    </v-btn>
-                    <v-divider
-                            class="mx-4"
-                            inset
-                            vertical
-                    ></v-divider>
-                    <v-spacer></v-spacer>
+                    <v-row justify="center">
 
-                    <v-text-field
-                            v-model="search"
-                            append-icon="mdi-magnify"
-                            label="Pesquisar"
-                            single-line
-                            hide-details
-                    ></v-text-field>
+                        <v-col cols="4" left>
+                            <v-btn
+                                    color="success"
+                                    dark
+                                    class="mb-2"
+                                    @click="$emit('xlsParaExportar')"
+                            >
+                                <i class="fas fa-file-excel mr-2 fa-lg"></i>
+                                Exportar XLS
+                            </v-btn>
+                        </v-col>
+
+                        <v-col cols="8" style="text-align: right">
+                            <v-btn
+                                    color="primary"
+                                    dark
+                                    class="mb-2"
+                                    v-bind="attrs"
+                                    v-on="on"
+                            >
+                                NOVO REGISTRO
+                            </v-btn>
+
+                            <v-text-field
+                                    v-model="search"
+                                    append-icon="mdi-magnify"
+                                    label="Pesquisar"
+                                    single-line
+                                    hide-details
+                            ></v-text-field>
+
+                        </v-col>
+
+
+                    </v-row>
                 </v-card-title>
                 <v-data-table
                         :headers="headers"

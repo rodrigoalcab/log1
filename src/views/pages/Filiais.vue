@@ -53,6 +53,8 @@
                @itemParaExcluir="remove"
                @xlsParaExportar="exportXLS"
                />
+
+
               </CCol>
             </CRow>
           </CCardBody>
