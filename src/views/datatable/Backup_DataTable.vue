@@ -63,7 +63,7 @@
                             <v-icon
                                     small
                                     class="mr-3 md-dark"
-                                    @click="openDialogEditItem(item.id)"
+                                    @click="openDialogEditItem(item)"
                             >
                                 mdi-pencil
                             </v-icon>
@@ -102,7 +102,7 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="post.userId"
+
                                                         label="userId"
                                                 ></v-text-field>
                                             </v-col>
@@ -112,7 +112,7 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="post.id"
+
                                                         label="id"
                                                 ></v-text-field>
                                             </v-col>
@@ -122,7 +122,7 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="post.title"
+
                                                         label="Title"
                                                 ></v-text-field>
                                             </v-col>
@@ -132,7 +132,7 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="post.body"
+
                                                         label="Body"
                                                 ></v-text-field>
                                             </v-col>
@@ -176,15 +176,6 @@
         props: ["posts"],
         data () {
             return {
-                id: null,
-                post: {
-                    userId: '',
-                    id: '',
-                    title: '',
-                    body: ''
-                },
-
-
                 dialog: false,
                 search: '',
                 headers: [
@@ -208,19 +199,9 @@
                 })
             },
 
-            openDialogEditItem (id) {
+            openDialogEditItem (item) {
                 this.editedIndex = 1
-
-                this.$http.get('/posts/' + id)
-                    .then(res => {
-                        this.post = res.data
-                        this.id = this.post.id
-                    }).catch( error => {
-                    console.log(error)
-                })
-
                 this.dialog = true
-
             },
 
             openDialogNewItem() {
