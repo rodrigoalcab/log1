@@ -5,12 +5,16 @@
                 <v-card-title>
                     <v-row justify="center">
 
+                        <b-alert show dismissible v-for="(message, index) in messages"
+                                 :key="index"
+                                 :variant="message.type">{{ message.text }}</b-alert>
+
                         <v-col cols="4" left>
                             <v-btn
                                     color="success"
                                     dark
                                     class="mb-2"
-                                    @click="$emit('xlsParaExportar')"
+                                    @click="exportXLS"
                             >
                                 <i class="fas fa-file-excel mr-2 fa-lg"></i>
                                 Exportar XLS
@@ -70,7 +74,7 @@
                             <v-icon
                                     small
                                     class="md-dark"
-                                    @click="$emit('itemParaExcluir', item.id)"
+                                    @click="deleteItem(item.id)"
                             >
                                 mdi-delete
                             </v-icon>
@@ -80,7 +84,6 @@
                 </v-data-table>
 
                 <!--                Begin Dialog-->
-
                 <template>
                     <div class="text-center">
                         <v-dialog
@@ -152,8 +155,10 @@
                                         Cancelar
                                     </v-btn>
                                     <v-btn
+                                            :disabled="saveButtonDisabled"
                                             color="blue darken-1"
                                             text
+                                            @click="save"
 
                                     >
                                         Salvar
@@ -163,8 +168,22 @@
                         </v-dialog>
                     </div>
                 </template>
-
                 <!--                End Dialog-->
+
+<!--                Begin dialogDelete-->
+                <v-dialog v-model="dialogDelete" max-width="500px">
+                    <v-card>
+                        <v-card-title class="text-h5">Deseja remover este registro?</v-card-title>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="closeDelete">Cancelar</v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="deleteItemConfirm">Remover</v-btn>
+                            <v-spacer></v-spacer>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+<!--                End dialogDelete-->
 
             </v-container>
         </v-main>
@@ -172,71 +191,12 @@
 </template>
 
 <script>
+    import datatableFilialMixin from '../../mixins/datatableFilialMixin';
     export default {
         props: ["posts"],
-        data () {
-            return {
-                id: null,
-                post: {
-                    userId: '',
-                    id: '',
-                    title: '',
-                    body: ''
-                },
+        mixins: [datatableFilialMixin],
 
 
-                dialog: false,
-                search: '',
-                headers: [
-                    { text: "User Id", value: "userId" },
-                    { text: "Id", value: "id" },
-                    { text: "Title", value: "title" },
-                    { text: "Body", value: "body" },
-                    { text: "Ações", value: "actions", sortable: false },
-                ],
-                editedIndex: 0,
-            }
-
-
-        },
-        methods: {
-            close () {
-                this.dialog = false
-                this.$nextTick(() => {
-                    this.editedItem = Object.assign({}, this.defaultItem)
-                    this.editedIndex = 1
-                })
-            },
-
-            openDialogEditItem (id) {
-                this.editedIndex = 1
-
-                this.$http.get('/posts/' + id)
-                    .then(res => {
-                        this.post = res.data
-                        this.id = this.post.id
-                    }).catch( error => {
-                    console.log(error)
-                })
-
-                this.dialog = true
-
-            },
-
-            openDialogNewItem() {
-                this.editedIndex = 0
-                this.dialog = true
-
-            }
-
-
-        },
-
-        computed: {
-            formTitle () {
-                return this.editedIndex === 0 ? 'Novo Registro' : 'Editar Registro'
-            },
-        },
     }
 </script>
 

@@ -33,36 +33,16 @@
         <CCard>
           <CCardHeader>
             <strong>Listagem de Filiais</strong>
-
           </CCardHeader>
           <CCardBody>
-            <b-alert show dismissible v-for="(message, index) in messages"
-                     :key="index"
-                     :variant="message.type">{{ message.text }}</b-alert>
             <CRow>
               <CCol sm="12">
-<!--                <div v-for="(post, index) in posts" :key="index">-->
-<!--                  <span><strong>userId:</strong> {{ post.userId }}</span><br>-->
-<!--                  <span><strong>ID:</strong> {{ post.id }}</span><br>-->
-<!--                  <span><strong>Title:</strong> {{ post.title }}</span><br>-->
-<!--                  <span><strong>Body:</strong> {{ post.body }}</span><br>-->
-<!--                  <span><strong>INDEX:</strong> {{ index }}</span><br>-->
-<!--                  <b-button class="ml-2" variant="warning" @click="buscarUm(post.id)">Editar</b-button>-->
-<!--                  <b-button class="ml-2" variant="danger" @click="excluir(post.id)">Excluir</b-button>-->
-<!--                  <hr>-->
-<!--                </div>-->
-               <DataTable :posts="posts"
-               @itemParaEditar="getOne"
-               @itemParaExcluir="remove"
-               @xlsParaExportar="exportXLS"
-               />
 
+               <DataTableFilial :posts="posts" />
 
               </CCol>
             </CRow>
           </CCardBody>
-
-
         </CCard>
       </CCol>
     </CRow>
@@ -71,24 +51,29 @@
 </template>
 
 <script>
-  import filiaisMixin from '@/mixins/filiaisMixin';
-  import DataTable from '../datatable/DataTable';
 
+import DataTableFilial from '../datatable/DataTableFilial';
 
 export default {
   name: 'Forms',
+  components: { DataTableFilial },
 
-  components: { DataTable },
-  mixins: [filiaisMixin],
+    data() {
+        return {
+            posts: [],
 
-  data() {
-    return {
+        }
+    },
+    methods: {
+
+    },
+
+    created() {
+        this.$http.get('/posts').then(res => {
+            this.posts = res.data
+        })
 
     }
-  },
-  methods: {
-
-  }
 
 }
 </script>
