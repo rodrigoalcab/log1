@@ -2,6 +2,7 @@ export default {
 
     data () {
         return {
+            emptyFieldsMessages: [],
             dialogDelete: false,
             saveButtonDisabled: false,
             messages: [],
@@ -55,7 +56,36 @@ export default {
 
         },
 
+        checkForm() {
+
+            this.emptyFieldsMessages = []
+
+            if (this.post.userId && this.post.id && this.post.title && this.post.body) {
+                return true
+            }
+
+            if (!this.post.userId) {
+                this.emptyFieldsMessages.push('Preencha o campo userId');
+            }
+
+            if (!this.post.id) {
+                this.emptyFieldsMessages.push('Preencha o campo id');
+            }
+
+            if (!this.post.title) {
+                this.emptyFieldsMessages.push('Preencha o campo title');
+            }
+
+            if (!this.post.body) {
+                this.emptyFieldsMessages.push('Preencha o campo body');
+            }
+
+        },
+
         save() {
+            if(!this.checkForm()) {
+                return
+            }
             this.disableButton()
             const method = this.id ? 'patch' : 'post'
             const finalUrl = this.id ? '/posts/' + this.id : '/posts'

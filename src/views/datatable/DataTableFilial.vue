@@ -98,6 +98,14 @@
 
                                 <v-card-text>
                                     <v-container>
+
+                                        <v-row style="margin-top: 0px;">
+                                            <ul v-for="(emptyFieldsMessage, index) in emptyFieldsMessages"
+                                                :key="index">
+                                                <li style="color: #FF6347; line-height: 0.575rem;">{{ emptyFieldsMessage }}</li>
+                                            </ul>
+                                        </v-row>
+
                                         <v-row>
                                             <v-col
                                                     cols="12"
