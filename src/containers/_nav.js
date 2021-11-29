@@ -37,7 +37,7 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'Produtos',
-        to: '/theme/colors',
+        to: '/base/produtos',
         icon: 'cil-drop'
       },
       {
@@ -55,13 +55,13 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'Perfil de veículos (conjuntos)',
-        to: '/theme/colors',
+        to: '/base/perfil-de-veiculos',
         icon: 'cil-drop'
       },
       {
         _name: 'CSidebarNavItem',
         name: 'Veículos',
-        to: '/theme/colors',
+        to: '/base/veiculos',
         icon: 'cil-drop'
       }
       ,

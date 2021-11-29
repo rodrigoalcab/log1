@@ -53,6 +53,9 @@ const Page500 = () => import('@/views/pages/Page500')
 const Login = () => import('@/views/pages/Login')
 const Register = () => import('@/views/pages/Register')
 const Filiais = () => import('@/views/pages/Filiais')
+const Produtos = () => import('@/views/pages/Produtos')
+const PerfilVeiculos = () => import('@/views/pages/PerfilVeiculos')
+const Veiculos = () => import('@/views/pages/Veiculos')
 
 // Users
 const Users = () => import('@/views/users/Users')
@@ -158,6 +161,21 @@ function configRoutes () {
               path: 'filiais',
               name: 'Filiais',
               component: Filiais
+            },
+            {
+              path: 'produtos',
+              name: 'Produtos',
+              component: Produtos
+            },
+            {
+              path: 'perfil-de-veiculos',
+              name: 'perfil-de-veiculos',
+              component: PerfilVeiculos
+            },
+            {
+              path: 'veiculos',
+              name: 'veiculos',
+              component: Veiculos
             },
             {
               path: 'switches',

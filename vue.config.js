@@ -11,4 +11,6 @@ module.exports = {
     '@coreui/utils',
     '@coreui/vue'
   ]
+
+
 }
