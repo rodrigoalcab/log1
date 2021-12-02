@@ -23,7 +23,6 @@ export default {
             dialog: false,
             search: '',
             headers: [
-                { text: "Id", value: "id" },
                 { text: "Modelo do Veículo", value: "modelo" },
                 { text: "Placa Cavalo", value: "placaCavalo" },
                 { text: "Placa Carreta", value: "placaCarreta" },
@@ -134,8 +133,11 @@ export default {
                     this.clearFields(this.veiculo)
 
                 }).catch( error => {
-                this.newMessage(this.messages, 'Erro para salvar!', 'danger')
-                console.log(error)
+                var message = error.response.data.description
+                var errorCode = error.response.data.code
+
+                this.newMessage(this.messages, "Código do Erro:" + errorCode + ' -> Descrição: ' + message, 'danger')
+                this.enableButton()
             })
 
 
@@ -164,8 +166,11 @@ export default {
                     this.clearFields(this.veiculo)
                     this.newMessage(this.messages, 'Produto excluído com sucesso', 'danger')
                 }).catch( error => {
-                this.newMessage(this.messages, 'Erro ao tentar excluir', 'danger')
-                console.log(error)
+                var errorCode = error.response.data.code
+                var message = error.response.data.description
+
+                this.newMessage(this.messages, "Código do Erro:" + errorCode + ' |  Descrição: ' + message, 'danger')
+                this.enableButton()
             })
             this.closeDelete()
         },

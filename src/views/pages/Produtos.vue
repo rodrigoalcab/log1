@@ -42,7 +42,6 @@ export default {
       getAll() {
         this.$http.get('/v1/produto').then(res => {
           this.produtos = res.data
-          console.log('listagem do updateData'+this.produtos)
 
         })
       },
@@ -52,7 +51,6 @@ export default {
     created() {
         this.$http.get('/v1/produto').then(res => {
             this.produtos = res.data
-            console.log('listagem do created'+this.produtos)
 
         })
     }

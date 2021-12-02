@@ -49,7 +49,7 @@
                 </v-card-title>
                 <v-data-table
                         :headers="headers"
-                        :items="posts"
+                        :items="transportadoras"
                         :items-per-page="5"
                         :search="search"
                         :footer-props="{
@@ -88,7 +88,7 @@
                     <div class="text-center">
                         <v-dialog
                                 v-model="dialog"
-                                max-width="500px"
+                                max-width="800px"
                         >
 
                             <v-card>
@@ -113,8 +113,8 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="post.userId"
-                                                        label="userId"
+                                                        v-model="transportadora.nome"
+                                                        label="Nome"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -123,8 +123,8 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="post.id"
-                                                        label="id"
+                                                        v-model="transportadora.cnpj"
+                                                        label="CNPJ"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -133,8 +133,8 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="post.title"
-                                                        label="Title"
+                                                        v-model="transportadora.telefone"
+                                                        label="Telefone"
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -143,8 +143,52 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="post.body"
-                                                        label="Body"
+                                                        v-model="transportadora.bairro"
+                                                        label="Bairro"
+                                                ></v-text-field>
+                                            </v-col>
+
+                                            <v-col
+                                                    cols="12"
+                                                    sm="6"
+                                                    md="4"
+                                            >
+                                                <v-text-field
+                                                        v-model="transportadora.cep"
+                                                        label="CEP"
+                                                ></v-text-field>
+                                            </v-col>
+
+                                            <v-col
+                                                    cols="12"
+                                                    sm="6"
+                                                    md="4"
+                                            >
+                                                <v-text-field
+                                                        v-model="transportadora.numero"
+                                                        label="Número"
+                                                ></v-text-field>
+                                            </v-col>
+
+                                            <v-col
+                                                    cols="12"
+                                                    sm="6"
+                                                    md="4"
+                                            >
+                                                <v-text-field
+                                                        v-model="transportadora.cidade"
+                                                        label="Cidade"
+                                                ></v-text-field>
+                                            </v-col>
+
+                                            <v-col
+                                                    cols="12"
+                                                    sm="6"
+                                                    md="4"
+                                            >
+                                                <v-text-field
+                                                        v-model="transportadora.estado"
+                                                        label="Estado"
                                                 ></v-text-field>
                                             </v-col>
 
@@ -199,10 +243,10 @@
 </template>
 
 <script>
-    import datatableFilialMixin from '../../mixins/datatableFilialMixin';
+    import datatableTransportadorasMixin from '../../mixins/datatableTransportadorasMixin';
     export default {
-        props: ["posts"],
-        mixins: [datatableFilialMixin],
+        props: ["transportadoras"],
+        mixins: [datatableTransportadorasMixin],
 
 
     }

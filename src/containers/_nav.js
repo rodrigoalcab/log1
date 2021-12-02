@@ -18,8 +18,8 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
-        name: 'Filiais',
-        to: '/base/filiais',
+        name: 'Transportadoras',
+        to: '/base/transportadoras',
         icon: 'cil-drop'
       },
       {

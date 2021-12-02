@@ -17,7 +17,6 @@ export default {
             dialog: false,
             search: '',
             headers: [
-                { text: "Id", value: "id" },
                 { text: "Código", value: "codigo" },
                 { text: "Nome", value: "nome" },
                 { text: "Ações", value: "actions", sortable: false },
@@ -107,14 +106,13 @@ export default {
                     this.clearFields(this.produto)
 
                 }).catch( error => {
-                this.newMessage(this.messages, 'Problema para excluir!', 'danger')
-                console.log(error)
+                    var errorCode = error.response.data.code
+                    var message = error.response.data.description
+
+                    this.newMessage(this.messages, "Código do Erro:" + errorCode + ' |  Descrição: ' + message, 'danger')
+                    this.enableButton()
             })
-
-
-
             this.close()
-
         },
 
         enableButton() {
@@ -137,8 +135,11 @@ export default {
                     this.clearFields(this.produto)
                     this.newMessage(this.messages, 'Produto excluído com sucesso', 'danger')
                 }).catch( error => {
-                this.newMessage(this.messages, 'Erro ao tentar excluir', 'danger')
-                console.log(error)
+                var errorCode = error.response.data.code
+                var message = error.response.data.description
+
+                this.newMessage(this.messages, "Código do Erro:" + errorCode + ' |  Descrição: ' + message, 'danger')
+
             })
             this.closeDelete()
         },

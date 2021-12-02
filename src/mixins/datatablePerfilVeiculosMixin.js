@@ -17,7 +17,6 @@ export default {
             dialog: false,
             search: '',
             headers: [
-                { text: "Id", value: "id" },
                 { text: "Modelo", value: "modelo" },
                 { text: "Quantidade de Eixos", value: "quantidadeEixos" },
                 { text: "Ações", value: "actions", sortable: false },
@@ -107,8 +106,13 @@ export default {
                     this.clearFields(this.perfil)
 
                 }).catch( error => {
-                this.newMessage(this.messages, 'Erro ao tentar salvar!', 'danger')
-                console.log(error)
+                var message = error.response.data.description
+                var errorCode = error.response.data.code
+
+                this.newMessage(this.messages, "Código do Erro:" + errorCode + ' -> Descrição: ' + message, 'danger')
+                // this.newMessage(this.messages, 'Código do Erro:' + errorCode, 'danger')
+                // this.newMessage(this.messages, 'Descrição: ' + message, 'danger')
+                this.enableButton()
             })
 
             this.close()

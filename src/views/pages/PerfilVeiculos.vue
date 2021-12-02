@@ -42,7 +42,6 @@ export default {
       getAll() {
         this.$http.get('/v1/modelo-veiculo').then(res => {
           this.perfis = res.data
-          console.log('listagem do updateData'+this.perfis)
 
         })
       },
@@ -52,7 +51,6 @@ export default {
     created() {
         this.$http.get('/v1/modelo-veiculo').then(res => {
             this.perfis = res.data
-            console.log('listagem do created'+this.perfis)
 
         })
     }

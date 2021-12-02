@@ -32,13 +32,14 @@
       <CCol sm="12">
         <CCard>
           <CCardHeader>
-            <strong>Listagem de Filiais</strong>
+            <strong>Listagem de Transportadoras</strong>
           </CCardHeader>
           <CCardBody>
             <CRow>
               <CCol sm="12">
 
-               <DataTableFilial :posts="posts" />
+               <DataTableTransportadoras :transportadoras="transportadoras"
+                @updateData="getAll"/>
 
               </CCol>
             </CRow>
@@ -52,25 +53,31 @@
 
 <script>
 
-import DataTableFilial from '../datatable/DataTableFilial';
+import DataTableTransportadoras from '../datatable/DataTableTransportadoras';
 
 export default {
   name: 'Forms',
-  components: { DataTableFilial },
+  components: { DataTableTransportadoras },
 
     data() {
         return {
-            posts: [],
+            transportadoras: [],
 
         }
     },
     methods: {
+      getAll() {
+        this.$http.get('/v1/transportadora').then(res => {
+          this.transportadoras = res.data
 
+
+        })
+      },
     },
 
     created() {
-        this.$http.get('/posts').then(res => {
-            this.posts = res.data
+        this.$http.get('/v1/transportadora').then(res => {
+            this.transportadoras = res.data
         })
 
     }

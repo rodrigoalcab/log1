@@ -52,7 +52,7 @@ const Page404 = () => import('@/views/pages/Page404')
 const Page500 = () => import('@/views/pages/Page500')
 const Login = () => import('@/views/pages/Login')
 const Register = () => import('@/views/pages/Register')
-const Filiais = () => import('@/views/pages/Filiais')
+const Transportadoras = () => import('@/views/pages/Transportadoras')
 const Produtos = () => import('@/views/pages/Produtos')
 const PerfilVeiculos = () => import('@/views/pages/PerfilVeiculos')
 const Veiculos = () => import('@/views/pages/Veiculos')
@@ -158,9 +158,9 @@ function configRoutes () {
               component: Forms
             },
             {
-              path: 'filiais',
-              name: 'Filiais',
-              component: Filiais
+              path: 'transportadoras',
+              name: 'transportadoras',
+              component: Transportadoras
             },
             {
               path: 'produtos',
