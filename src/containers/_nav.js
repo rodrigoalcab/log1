@@ -49,7 +49,7 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'Motoristas',
-        to: '/theme/colors',
+        to: '/base/motoristas',
         icon: 'cil-drop'
       },
       {

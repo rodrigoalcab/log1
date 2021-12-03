@@ -56,6 +56,7 @@ const Transportadoras = () => import('@/views/pages/Transportadoras')
 const Produtos = () => import('@/views/pages/Produtos')
 const PerfilVeiculos = () => import('@/views/pages/PerfilVeiculos')
 const Veiculos = () => import('@/views/pages/Veiculos')
+const Motoristas = () => import('@/views/pages/Motoristas')
 
 // Users
 const Users = () => import('@/views/users/Users')
@@ -176,6 +177,11 @@ function configRoutes () {
               path: 'veiculos',
               name: 'veiculos',
               component: Veiculos
+            },
+            {
+              path: 'motoristas',
+              name: 'motoristas',
+              component: Motoristas
             },
             {
               path: 'switches',
