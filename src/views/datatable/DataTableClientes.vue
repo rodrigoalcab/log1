@@ -49,7 +49,7 @@
                 </v-card-title>
                 <v-data-table
                         :headers="headers"
-                        :items="motoristas"
+                        :items="clientes"
                         :items-per-page="5"
                         :search="search"
                         :footer-props="{
@@ -115,7 +115,7 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="motorista.nome"
+                                                        v-model="cliente.nome"
                                                         label="Nome"
                                                 ></v-text-field>
                                             </v-col>
@@ -126,29 +126,7 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="motorista.cnh"
-                                                        label="CNH"
-                                                ></v-text-field>
-                                            </v-col>
-
-                                            <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                            >
-                                                <v-text-field
-                                                        v-model="motorista.cpf"
-                                                        label="CPF"
-                                                ></v-text-field>
-                                            </v-col>
-
-                                            <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                            >
-                                                <v-text-field
-                                                        v-model="motorista.cnpj"
+                                                        v-model="cliente.cnpj"
                                                         label="CNPJ"
                                                 ></v-text-field>
                                             </v-col>
@@ -159,8 +137,8 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="motorista.categoriaCnh"
-                                                        label="Categoria CNH"
+                                                        v-model="cliente.cidade"
+                                                        label="Cidade"
                                                 ></v-text-field>
                                             </v-col>
 
@@ -170,8 +148,8 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="motorista.vencimentoCnh"
-                                                        label="Vencimento CNH"
+                                                        v-model="cliente.bairro"
+                                                        label="Bairro"
                                                 ></v-text-field>
                                             </v-col>
 
@@ -181,10 +159,11 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="motorista.telefone"
-                                                        label="Telefone"
+                                                        v-model="cliente.telefone"
+                                                        label="telefone"
                                                 ></v-text-field>
                                             </v-col>
+
 
                                         </v-row>
                                     </v-container>
@@ -236,10 +215,10 @@
 </template>
 
 <script>
-    import datatableMotoristasMixin from '../../mixins/datatableMotoristasMixin';
+    import datatableClientesMixin from '../../mixins/datatableClientesMixin';
     export default {
-        props: ["motoristas"],
-        mixins: [datatableMotoristasMixin],
+        props: ["clientes"],
+        mixins: [datatableClientesMixin],
 
 
     }

@@ -4,13 +4,13 @@
       <CCol sm="12">
         <CCard>
           <CCardHeader>
-            <strong>Listagem de Produtos</strong>
+            <strong>Listagem de Localidades</strong>
           </CCardHeader>
           <CCardBody>
             <CRow>
               <CCol sm="12">
 
-               <DataTableProdutos :produtos="produtos"
+               <DataTableLocalidades :localidades="localidades"
                @updateData="getAll" />
 
               </CCol>
@@ -25,23 +25,23 @@
 
 <script>
 
-import DataTableProdutos from '../datatable/DataTableProdutos';
+import DataTableLocalidades from '../datatable/DataTableLocalidades';
 
 export default {
   name: 'Forms',
-  components: { DataTableProdutos },
+  components: { DataTableLocalidades },
 
     data() {
         return {
-            produtos: [],
+            localidades: [],
 
         }
     },
     methods: {
 
       getAll() {
-        this.$http.get('/v1/produto').then(res => {
-          this.produtos = res.data
+        this.$http.get('/v1/localidade').then(res => {
+          this.localidades = res.data
 
         })
       },
@@ -49,8 +49,8 @@ export default {
     },
 
     created() {
-        this.$http.get('/v1/produto').then(res => {
-            this.produtos = res.data
+        this.$http.get('/v1/localidade').then(res => {
+            this.localidades = res.data
 
         })
     }

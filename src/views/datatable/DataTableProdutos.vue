@@ -5,6 +5,8 @@
                 <v-card-title>
                     <v-row justify="center">
 
+
+
                         <b-alert show dismissible v-for="(message, index) in messages"
                                  :key="index"
                                  :variant="message.type">{{ message.text }}</b-alert>
@@ -115,8 +117,10 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="produto.codigo"
                                                         label="Código"
+                                                        v-model.trim="$v.produto.codigo.$model"
+                                                        :class="{ errorValidation: $v.produto.codigo.$error }"
+
                                                 ></v-text-field>
                                             </v-col>
                                             <v-col
@@ -125,8 +129,11 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="produto.nome"
                                                         label="Nome"
+                                                        v-model.trim="$v.produto.nome.$model"
+                                                        :class="{ errorValidation: $v.produto.nome.$error }"
+
+
                                                 ></v-text-field>
                                             </v-col>
 
@@ -180,12 +187,12 @@
 </template>
 
 <script>
+    import { required, minLength, between } from "vuelidate/lib/validators";
     import datatableProdutosMixin from '../../mixins/datatableProdutosMixin';
+
     export default {
         props: ["produtos"],
         mixins: [datatableProdutosMixin],
-
-
     }
 </script>
 
@@ -194,6 +201,10 @@
     .md-dark {
         color: rgba(0, 0, 0, 0.54) !important;
         font-size: 20px !important;
+    }
+
+    .errorValidation {
+        border: 1px solid red;
     }
 
 

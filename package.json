@@ -43,6 +43,7 @@
     "vue": "~2.6.12",
     "vue-axios": "^3.2.5",
     "vue-router": "^3.5.1",
+    "vuelidate": "^0.7.6",
     "vuetify": "^2.5.8",
     "vuex": "~3.6.2"
   },

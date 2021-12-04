@@ -49,7 +49,7 @@
                 </v-card-title>
                 <v-data-table
                         :headers="headers"
-                        :items="motoristas"
+                        :items="localidades"
                         :items-per-page="5"
                         :search="search"
                         :footer-props="{
@@ -108,83 +108,62 @@
 
                                         <v-row>
 
-
-                                            <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                            >
+                                            <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="motorista.nome"
+                                                        v-model="localidade.nome"
                                                         label="Nome"
                                                 ></v-text-field>
                                             </v-col>
 
-                                            <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                            >
+                                            <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="motorista.cnh"
-                                                        label="CNH"
+                                                        v-model="localidade.rua"
+                                                        label="Rua"
                                                 ></v-text-field>
                                             </v-col>
 
-                                            <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                            >
+                                            <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="motorista.cpf"
-                                                        label="CPF"
+                                                        v-model="localidade.numero"
+                                                        label="Número"
                                                 ></v-text-field>
                                             </v-col>
 
-                                            <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                            >
+                                            <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="motorista.cnpj"
-                                                        label="CNPJ"
+                                                        v-model="localidade.bairro"
+                                                        label="Bairro"
                                                 ></v-text-field>
                                             </v-col>
 
-                                            <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                            >
+                                            <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="motorista.categoriaCnh"
-                                                        label="Categoria CNH"
+                                                        v-model="localidade.cidade"
+                                                        label="Cidade"
                                                 ></v-text-field>
                                             </v-col>
 
-                                            <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                            >
+                                            <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="motorista.vencimentoCnh"
-                                                        label="Vencimento CNH"
+                                                        v-model="localidade.estado"
+                                                        label="Estado"
                                                 ></v-text-field>
                                             </v-col>
 
-                                            <v-col
-                                                    cols="12"
-                                                    sm="6"
-                                                    md="4"
-                                            >
+                                            <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="motorista.telefone"
+                                                        v-model="localidade.complemento"
+                                                        label="Complemento"
+                                                ></v-text-field>
+                                            </v-col>
+
+                                            <v-col cols="12" sm="6" md="4">
+                                                <v-text-field
+                                                        v-model="localidade.telefone"
                                                         label="Telefone"
                                                 ></v-text-field>
                                             </v-col>
+
 
                                         </v-row>
                                     </v-container>
@@ -236,10 +215,10 @@
 </template>
 
 <script>
-    import datatableMotoristasMixin from '../../mixins/datatableMotoristasMixin';
+    import datatableLocalidadesMixin from '../../mixins/datatableLocalidadesMixin';
     export default {
-        props: ["motoristas"],
-        mixins: [datatableMotoristasMixin],
+        props: ["localidades"],
+        mixins: [datatableLocalidadesMixin],
 
 
     }

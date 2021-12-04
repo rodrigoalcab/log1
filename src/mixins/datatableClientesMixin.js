@@ -7,14 +7,12 @@ export default {
             saveButtonDisabled: false,
             messages: [],
             id: null,
-            motorista: {
+            cliente: {
                 id: '',
                 nome: '',
-                cnh: '',
-                cpf: '',
                 cnpj: '',
-                categoriaCnh: '',
-                vencimentoCnh: '',
+                cidade: '',
+                bairro: '',
                 telefone: ''
             },
 
@@ -23,11 +21,9 @@ export default {
             search: '',
             headers: [
                 { text: "Nome", value: "nome" },
-                { text: "CNH", value: "cnh" },
-                { text: "CPF", value: "cpf" },
                 { text: "CNPJ", value: "cnpj" },
-                { text: "Categoria CNH", value: "categoriaCnh" },
-                { text: "Vencimento CNH", value: "vencimentoCnh" },
+                { text: "Cidade", value: "cidade" },
+                { text: "Bairro", value: "bairro" },
                 { text: "Telefone", value: "telefone" },
                 { text: "Ações", value: "actions", sortable: false },
             ],
@@ -45,10 +41,10 @@ export default {
         openDialogEditItem (id) {
             this.editedIndex = 1
 
-            this.$http.get('/v1/motorista/' + id)
+            this.$http.get('/v1/cliente/' + id)
                 .then(res => {
-                    this.motorista = res.data
-                    this.id = this.motorista.id
+                    this.cliente = res.data
+                    this.id = this.cliente.id
                 }).catch( error => {
                 console.log(error)
             })
@@ -67,43 +63,33 @@ export default {
 
             this.emptyFieldsMessages = []
 
-            if (this.motorista.nome &&
-                this.motorista.cnh &&
-                this.motorista.cpf &&
-                this.motorista.cnpj &&
-                this.motorista.categoriaCnh &&
-                this.motorista.vencimentoCnh &&
-                this.motorista.telefone
+            if (this.cliente.nome &&
+                this.cliente.cnpj &&
+                this.cliente.cidade &&
+                this.cliente.bairro &&
+                this.cliente.telefone
             ) {
                 return true
             }
 
 
-            if (!this.motorista.nome) {
+            if (!this.cliente.nome) {
                 this.emptyFieldsMessages.push('Preencha o campo Nome');
             }
 
-            if (!this.motorista.cnh) {
-                this.emptyFieldsMessages.push('Preencha o campo CNH');
-            }
-
-            if (!this.motorista.cpf) {
-                this.emptyFieldsMessages.push('Preencha o campo CPF');
-            }
-
-            if (!this.motorista.cnpj) {
+            if (!this.cliente.cnpj) {
                 this.emptyFieldsMessages.push('Preencha o campo CNPJ');
             }
 
-            if (!this.motorista.categoriaCnh) {
-                this.emptyFieldsMessages.push('Preencha o campo Categoria CNH');
+            if (!this.cliente.cidade) {
+                this.emptyFieldsMessages.push('Preencha o campo Cidade');
             }
 
-            if (!this.motorista.vencimentoCnh) {
-                this.emptyFieldsMessages.push('Preencha o campo Vencimento CNH');
+            if (!this.cliente.bairro) {
+                this.emptyFieldsMessages.push('Preencha o campo Bairro');
             }
 
-            if (!this.motorista.telefone) {
+            if (!this.cliente.telefone) {
                 this.emptyFieldsMessages.push('Preencha o campo Telefone');
             }
 
@@ -119,9 +105,9 @@ export default {
             }
             this.disableButton()
             const method = this.id ? 'put' : 'post'
-            const finalUrl = this.id ? '/v1/motorista' : '/v1/motorista'
+            const finalUrl = this.id ? '/v1/cliente' : '/v1/cliente'
 
-            this.$http[method]('' + finalUrl, this.motorista)
+            this.$http[method]('' + finalUrl, this.cliente)
                 .then(response => {
 
                     this.enableButton()
@@ -130,17 +116,17 @@ export default {
                         this.$emit('updateData')
 
                         if(method === 'put') {
-                            this.newMessage(this.messages, 'Motorista editado com sucesso!', 'success')
+                            this.newMessage(this.messages, 'Cliente editado com sucesso!', 'success')
                         }
 
                         if(method === 'post') {
-                            this.newMessage(this.messages, 'Motorista registrado com sucesso!', 'success')
+                            this.newMessage(this.messages, 'Cliente registrado com sucesso!', 'success')
                         }
 
 
                     }
 
-                    this.clearFields(this.motorista)
+                    this.clearFields(this.cliente)
 
                 }).catch( error => {
                     var errorCode = error.response.data.code
@@ -166,11 +152,11 @@ export default {
         },
 
         deleteItemConfirm () {
-            this.$http.delete('/v1/motorista/' + this.id)
+            this.$http.delete('/v1/cliente/' + this.id)
                 .then(() => {
                     this.$emit('updateData')
-                    this.clearFields(this.motorista)
-                    this.newMessage(this.messages, 'Motorista excluído com sucesso', 'danger')
+                    this.clearFields(this.cliente)
+                    this.newMessage(this.messages, 'Cliente excluído com sucesso', 'danger')
                 }).catch( error => {
                 var errorCode = error.response.data.code
                 var message = error.response.data.description

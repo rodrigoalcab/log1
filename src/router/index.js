@@ -57,6 +57,8 @@ const Produtos = () => import('@/views/pages/Produtos')
 const PerfilVeiculos = () => import('@/views/pages/PerfilVeiculos')
 const Veiculos = () => import('@/views/pages/Veiculos')
 const Motoristas = () => import('@/views/pages/Motoristas')
+const Localidades = () => import('@/views/pages/Localidades')
+const Clientes = () => import('@/views/pages/Clientes')
 
 // Users
 const Users = () => import('@/views/users/Users')
@@ -182,6 +184,16 @@ function configRoutes () {
               path: 'motoristas',
               name: 'motoristas',
               component: Motoristas
+            },
+            {
+              path: 'localidades',
+              name: 'localidades',
+              component: Localidades
+            },
+            {
+              path: 'clientes',
+              name: 'clientes',
+              component: Clientes
             },
             {
               path: 'switches',

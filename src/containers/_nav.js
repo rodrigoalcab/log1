@@ -31,7 +31,7 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'Clientes',
-        to: '/theme/colors',
+        to: '/base/clientes',
         icon: 'cil-drop'
       },
       {
@@ -43,7 +43,7 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'Localidades',
-        to: '/theme/colors',
+        to: '/base/localidades',
         icon: 'cil-drop'
       },
       {

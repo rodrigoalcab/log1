@@ -6,6 +6,8 @@ import CoreuiVue from '@coreui/vue'
 import { iconsSet as icons } from './assets/icons/icons.js'
 import store from './store'
 import './plugins/axios'
+import Vuelidate from 'vuelidate'
+
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
@@ -13,6 +15,8 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(Vuelidate)
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
@@ -24,6 +28,7 @@ import vuetify from './plugins/vuetify' // path to vuetify export
 Vue.config.performance = true
 Vue.use(CoreuiVue)
 Vue.prototype.$log = console.log.bind(console)
+
 
 
 Vue.mixin({

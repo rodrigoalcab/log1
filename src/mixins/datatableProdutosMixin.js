@@ -1,3 +1,5 @@
+import { required, integer } from "vuelidate/lib/validators";
+
 export default {
 
     data () {
@@ -23,8 +25,17 @@ export default {
             ],
             editedIndex: 0,
         }
-
-
+    },
+    validations: {
+        produto: {
+            codigo: {
+                required,
+                integer
+            },
+            nome: {
+                required
+            },
+        }
     },
     methods: {
         close () {
@@ -57,17 +68,20 @@ export default {
 
             this.emptyFieldsMessages = []
 
-            if (this.produto.codigo && this.produto.nome) {
-                return true
+            if (!this.produto.codigo || this.$v.produto.codigo.$invalid) {
+                this.emptyFieldsMessages.push('Preencha o campo código com um número inteiro');
             }
 
-
-            if (!this.produto.codigo) {
-                this.emptyFieldsMessages.push('Preencha o campo código');
-            }
-
-            if (!this.produto.nome) {
+            if (!this.produto.nome || this.$v.produto.nome.$invalid ) {
                 this.emptyFieldsMessages.push('Preencha o campo nome');
+
+            }
+
+            if(this.$v.$invalid) {
+                return
+            } else {
+                this.$v.$reset();
+                return true
             }
 
         },
@@ -80,6 +94,7 @@ export default {
             if(!this.checkForm()) {
                 return
             }
+
             this.disableButton()
             const method = this.id ? 'put' : 'post'
             const finalUrl = this.id ? '/v1/produto' : '/v1/produto'
