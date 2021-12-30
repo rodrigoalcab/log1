@@ -9,14 +9,15 @@ export default {
             id: null,
             localidade: {
                 id: '',
-                nome: '',
-                rua: '',
-                numero: '',
                 bairro: '',
-                complemento: '',
+                cep: '',
                 cidade: '',
+                complemento: '',
                 estado: '',
-                telefone: ''
+                logradouro: '',
+                nome: '',
+                numero: '',
+                telefone: '',
             },
 
 
@@ -24,9 +25,10 @@ export default {
             search: '',
             headers: [
                 { text: "Nome", value: "nome" },
-                { text: "Rua", value: "rua" },
+                { text: "Logradouro", value: "logradouro" },
                 { text: "Número", value: "numero" },
                 { text: "Bairro", value: "bairro" },
+                { text: "CEP", value: "cep" },
                 { text: "Cidade", value: "cidade" },
                 { text: "Estado", value: "estado" },
                 { text: "Complemento", value: "complemento" },
@@ -70,12 +72,13 @@ export default {
             this.emptyFieldsMessages = []
 
             if (this.localidade.nome &&
-                this.localidade.rua &&
+                this.localidade.logradouro &&
                 this.localidade.numero &&
                 this.localidade.bairro &&
                 this.localidade.cidade &&
                 this.localidade.estado &&
                 this.localidade.complemento &&
+                this.localidade.cep &&
                 this.localidade.telefone
             ) {
                 return true
@@ -86,8 +89,8 @@ export default {
                 this.emptyFieldsMessages.push('Preencha o campo Nome');
             }
 
-            if (!this.localidade.rua) {
-                this.emptyFieldsMessages.push('Preencha o campo Rua');
+            if (!this.localidade.logradouro) {
+                this.emptyFieldsMessages.push('Preencha o campo Logradouro');
             }
 
             if (!this.localidade.numero) {
@@ -108,6 +111,10 @@ export default {
 
             if (!this.localidade.complemento) {
                 this.emptyFieldsMessages.push('Preencha o campo Complemento');
+            }
+
+            if (!this.localidade.cep) {
+                this.emptyFieldsMessages.push('Preencha o campo CEP');
             }
 
             if (!this.localidade.telefone) {

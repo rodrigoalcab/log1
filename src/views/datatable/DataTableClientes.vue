@@ -148,8 +148,8 @@
                                                     md="4"
                                             >
                                                 <v-text-field
-                                                        v-model="cliente.bairro"
-                                                        label="Bairro"
+                                                        v-model="cliente.estado"
+                                                        label="Estado"
                                                 ></v-text-field>
                                             </v-col>
 

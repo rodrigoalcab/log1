@@ -12,7 +12,7 @@ export default {
                 nome: '',
                 cnpj: '',
                 cidade: '',
-                bairro: '',
+                estado: '',
                 telefone: ''
             },
 
@@ -23,7 +23,7 @@ export default {
                 { text: "Nome", value: "nome" },
                 { text: "CNPJ", value: "cnpj" },
                 { text: "Cidade", value: "cidade" },
-                { text: "Bairro", value: "bairro" },
+                { text: "Estado", value: "estado" },
                 { text: "Telefone", value: "telefone" },
                 { text: "Ações", value: "actions", sortable: false },
             ],
@@ -66,7 +66,7 @@ export default {
             if (this.cliente.nome &&
                 this.cliente.cnpj &&
                 this.cliente.cidade &&
-                this.cliente.bairro &&
+                this.cliente.estado &&
                 this.cliente.telefone
             ) {
                 return true
@@ -85,8 +85,8 @@ export default {
                 this.emptyFieldsMessages.push('Preencha o campo Cidade');
             }
 
-            if (!this.cliente.bairro) {
-                this.emptyFieldsMessages.push('Preencha o campo Bairro');
+            if (!this.cliente.estado) {
+                this.emptyFieldsMessages.push('Preencha o campo Estado');
             }
 
             if (!this.cliente.telefone) {

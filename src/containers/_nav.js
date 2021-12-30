@@ -54,7 +54,7 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
-        name: 'Perfil de veículos (conjuntos)',
+        name: 'Perfil de veículos',
         to: '/base/perfil-de-veiculos',
         icon: 'cil-drop'
       },
@@ -85,13 +85,13 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'Fretes',
-        to: '/base',
+        to: '/base/fretes',
         icon: 'cil-puzzle'
       },
       {
         _name: 'CSidebarNavItem',
         name: 'Pedidos',
-        to: '/base',
+        to: '/base/pedidos',
         icon: 'cil-puzzle'
       },
       {

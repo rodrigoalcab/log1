@@ -49,7 +49,7 @@
                 </v-card-title>
                 <v-data-table
                         :headers="headers"
-                        :items="localidades"
+                        :items="pedidos"
                         :items-per-page="5"
                         :search="search"
                         :footer-props="{
@@ -71,13 +71,7 @@
                             >
                                 mdi-pencil
                             </v-icon>
-                            <v-icon
-                                    small
-                                    class="md-dark"
-                                    @click="deleteItem(item.id)"
-                            >
-                                mdi-delete
-                            </v-icon>
+
                         </div>
                     </template>
 
@@ -109,68 +103,111 @@
                                         <v-row>
 
                                             <v-col cols="12" sm="6" md="4">
+                                                    <label for="modelo">Selecione um cliente:</label>
+                                                    <select v-model="pedido.idCliente" class="form-select"  >
+                                                        <option v-if="edicao" selected>{{ clienteSelecionado }}</option>
+                                                        <option v-else v-for="cliente in listaDeClientes" :key="cliente.id" :value="cliente.id">{{ cliente.nome }}</option>
+                                                    </select>
+                                            </v-col>
+
+                                            <v-col cols="12" sm="6" md="4">
+                                                <label for="modelo">Selecione um produto:</label>
+                                                    <select v-model="pedido.idProduto" class="form-select" >
+                                                        <option v-for="produto in listaDeProdutos" :key="produto.id" :value="produto.id">{{ produto.nome }}</option>
+                                                    </select>
+                                            </v-col>
+
+                                            <v-col cols="12" sm="6" md="4">
+                                                <label for="modelo">Selecione a origem:</label>
+                                                <select v-model="pedido.idOrigem" class="form-select" >
+                                                    <option v-for="origem in listaDeOrigens" :key="origem.id" :value="origem.id">
+                                                        {{ origem.nome }}
+                                                    </option>
+                                                </select>
+                                            </v-col>
+
+                                            <v-col cols="12" sm="6" md="4">
+                                                <label for="modelo">Selecione o destino:</label>
+                                                <select v-model="pedido.idDestino" class="form-select" >
+                                                    <option v-for="destino in listaDeDestinos" :key="destino.id" :value="destino.id">
+                                                        {{ destino.nome }}
+                                                    </option>
+                                                </select>
+                                            </v-col>
+
+                                            <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="localidade.nome"
-                                                        label="Nome"
+                                                        v-model.number="pedido.quantidade"
+                                                        label="Quantidade"
+                                                ></v-text-field>
+                                            </v-col>
+
+                                            <v-col cols="12" sm="6" md="4">
+                                                <label for="modelo">Unidade de medida:</label>
+                                                <select v-model="pedido.unidadeMedida" class="form-select" >
+                                                    <option v-for="unidadeMedida in listaDeUnidadeDeMedida" :key="unidadeMedida" :value="unidadeMedida">
+                                                        {{ unidadeMedida }}
+                                                    </option>
+                                                </select>
+                                            </v-col>
+
+                                            <v-col cols="12" sm="6" md="4">
+                                                <v-text-field
+                                                        v-model="pedido.inicio"
+                                                        label="Data Início"
                                                 ></v-text-field>
                                             </v-col>
 
                                             <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="localidade.logradouro"
-                                                        label="Logradouro"
+                                                        v-model="pedido.fim"
+                                                        label="Data Fim"
                                                 ></v-text-field>
                                             </v-col>
 
                                             <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="localidade.numero"
-                                                        label="Número"
+                                                        v-model.number="pedido.cadencia"
+                                                        label="Cadência"
                                                 ></v-text-field>
                                             </v-col>
 
                                             <v-col cols="12" sm="6" md="4">
-                                                <v-text-field
-                                                        v-model="localidade.bairro"
-                                                        label="Bairro"
-                                                ></v-text-field>
+                                                <label for="modelo">Tempo da Cadência:</label>
+                                                <select v-model="pedido.unidadeTempoCadencia" class="form-select" >
+                                                    <option v-for="unidadeTempoCadencia in listaDeUnidadeTempoCadencia" :key="unidadeTempoCadencia" :value="unidadeTempoCadencia">
+                                                        {{ unidadeTempoCadencia }}
+                                                    </option>
+                                                </select>
                                             </v-col>
 
                                             <v-col cols="12" sm="6" md="4">
                                                 <v-text-field
-                                                        v-model="localidade.cidade"
-                                                        label="Cidade"
+                                                        v-model="pedido.observacao"
+                                                        label="Observações"
                                                 ></v-text-field>
                                             </v-col>
 
-                                            <v-col cols="12" sm="6" md="4">
-                                                <v-text-field
-                                                        v-model="localidade.estado"
-                                                        label="Estado"
-                                                ></v-text-field>
-                                            </v-col>
-
-                                            <v-col cols="12" sm="6" md="4">
-                                                <v-text-field
-                                                        v-model="localidade.complemento"
-                                                        label="Complemento"
-                                                ></v-text-field>
-                                            </v-col>
-
-                                            <v-col cols="12" sm="6" md="4">
-                                                <v-text-field
-                                                        v-model="localidade.cep"
-                                                        label="CEP"
-                                                ></v-text-field>
-                                            </v-col>
-
-                                            <v-col cols="12" sm="6" md="4">
-                                                <v-text-field
-                                                        v-model="localidade.telefone"
-                                                        label="Telefone"
-                                                ></v-text-field>
-                                            </v-col>
-
+<!--                                            <v-col-->
+<!--                                                    cols="12"-->
+<!--                                                    sm="6"-->
+<!--                                                    md="4"-->
+<!--                                            >-->
+<!--                                                <v-text-field-->
+<!--                                                        v-model="pedido.placaCarreta"-->
+<!--                                                        label="Placa Carreta"-->
+<!--                                                ></v-text-field>-->
+<!--                                            </v-col>-->
+<!--                                            <v-col-->
+<!--                                                    cols="12"-->
+<!--                                                    sm="6"-->
+<!--                                                    md="4"-->
+<!--                                            >-->
+<!--                                                <v-text-field-->
+<!--                                                        v-model="veiculo.placaCarreta2"-->
+<!--                                                        label="Placa Carreta 2"-->
+<!--                                                ></v-text-field>-->
+<!--                                            </v-col>-->
 
                                         </v-row>
                                     </v-container>
@@ -222,10 +259,10 @@
 </template>
 
 <script>
-    import datatableLocalidadesMixin from '../../mixins/datatableLocalidadesMixin';
+    import datatablePedidosMixin from '../../mixins/datatablePedidosMixin';
     export default {
-        props: ["localidades"],
-        mixins: [datatableLocalidadesMixin],
+        props: ["pedidos"],
+        mixins: [datatablePedidosMixin],
 
 
     }

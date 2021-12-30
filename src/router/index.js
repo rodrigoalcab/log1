@@ -59,6 +59,7 @@ const Veiculos = () => import('@/views/pages/Veiculos')
 const Motoristas = () => import('@/views/pages/Motoristas')
 const Localidades = () => import('@/views/pages/Localidades')
 const Clientes = () => import('@/views/pages/Clientes')
+const Pedidos = () => import('@/views/pages/Pedidos')
 
 // Users
 const Users = () => import('@/views/users/Users')
@@ -194,6 +195,11 @@ function configRoutes () {
               path: 'clientes',
               name: 'clientes',
               component: Clientes
+            },
+            {
+              path: 'pedidos',
+              name: 'pedidos',
+              component: Pedidos
             },
             {
               path: 'switches',
