@@ -23,7 +23,7 @@ export default {
                 observacao: '',
 
             },
-            clienteSelecionado: null,
+            idClienteSelecionado: null,
             listaDeClientes: [],
 
             origemSelecionado: null,
@@ -119,8 +119,8 @@ export default {
                     this.pedido = res.data
                     this.id = this.pedido.id
                     this.edicao = true
-                    this.clienteSelecionado = this.pedido.cliente.nome
-                    console.log('clicou em editar, carregou pedido por id' + this.pedido.id)
+                    this.idClienteSelecionado = this.pedido.cliente.id
+
                     console.log(this.edicao)
 
                 }).catch( error => {

@@ -104,10 +104,18 @@
 
                                             <v-col cols="12" sm="6" md="4">
                                                     <label for="modelo">Selecione um cliente:</label>
-                                                    <select v-model="pedido.idCliente" class="form-select"  >
-                                                        <option v-if="edicao" selected>{{ clienteSelecionado }}</option>
-                                                        <option v-else v-for="cliente in listaDeClientes" :key="cliente.id" :value="cliente.id">{{ cliente.nome }}</option>
-                                                    </select>
+
+                                                        <select v-if="!edicao" v-model="pedido.idCliente" class="form-select">
+                                                            <option v-for="cliente in listaDeClientes" :key="cliente.id" :value="cliente.id">
+                                                                {{ cliente.nome }}
+                                                            </option>
+                                                        </select>
+
+                                                        <select v-else v-model="idClienteSelecionado" class="form-select">
+                                                            <option v-for="cliente in listaDeClientes" :key="cliente.id" :value="cliente.id" selected="cliente.id === 'idClienteSelecionado ? true : false'">
+                                                                {{ cliente.nome }}
+                                                            </option>
+                                                        </select>
                                             </v-col>
 
                                             <v-col cols="12" sm="6" md="4">
