@@ -118,29 +118,63 @@
                                                         </select>
                                             </v-col>
 
+
+                                            <v-col cols="12" sm="6" md="4">
+                                                <v-text-field
+                                                        v-model="pedido.instrucao"
+                                                        label="Instrucao"
+                                                ></v-text-field>
+                                            </v-col>
+
+
+
                                             <v-col cols="12" sm="6" md="4">
                                                 <label for="modelo">Selecione um produto:</label>
-                                                    <select v-model="pedido.idProduto" class="form-select" >
+
+                                                <select v-if="!edicao" v-model="pedido.idProduto" class="form-select" >
                                                         <option v-for="produto in listaDeProdutos" :key="produto.id" :value="produto.id">{{ produto.nome }}</option>
                                                     </select>
+
+                                                <select v-else v-model="idProdutoSelecionado" class="form-select" >
+                                                    <option v-for="produto in listaDeProdutos" :key="produto.id" :value="produto.id" selected="produto.id === 'idProdutoSelecionado ? true : false'">
+                                                        {{ produto.nome }}
+                                                    </option>
+                                                </select>
+
                                             </v-col>
 
                                             <v-col cols="12" sm="6" md="4">
                                                 <label for="modelo">Selecione a origem:</label>
-                                                <select v-model="pedido.idOrigem" class="form-select" >
+
+                                                <select v-if="!edicao" v-model="pedido.idOrigem" class="form-select" >
                                                     <option v-for="origem in listaDeOrigens" :key="origem.id" :value="origem.id">
                                                         {{ origem.nome }}
                                                     </option>
                                                 </select>
+
+                                                <select v-else v-model="idOrigemSelecionado" class="form-select" >
+                                                    <option v-for="origem in listaDeOrigens" :key="origem.id" :value="origem.id" selected="origem.id === 'idOrigemSelecionado ? true : false'">
+                                                        {{ origem.nome }}
+                                                    </option>
+                                                </select>
+
                                             </v-col>
 
                                             <v-col cols="12" sm="6" md="4">
                                                 <label for="modelo">Selecione o destino:</label>
-                                                <select v-model="pedido.idDestino" class="form-select" >
+
+                                                <select v-if="!edicao" v-model="pedido.idDestino" class="form-select" >
                                                     <option v-for="destino in listaDeDestinos" :key="destino.id" :value="destino.id">
                                                         {{ destino.nome }}
                                                     </option>
                                                 </select>
+
+                                                <select v-else v-model="idDestinoSelecionado" class="form-select" >
+                                                    <option v-for="destino in listaDeDestinos" :key="destino.id" :value="destino.id" selected="destino.id === 'idDestinoSelecionado ? true : false'">
+                                                        {{ destino.nome }}
+                                                    </option>
+                                                </select>
+
                                             </v-col>
 
                                             <v-col cols="12" sm="6" md="4">

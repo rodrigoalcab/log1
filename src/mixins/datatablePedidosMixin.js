@@ -10,6 +10,7 @@ export default {
             edicao: false,
             pedido: {
                 idCliente: '',
+                instrucao: '',
                 idTransportadora: 7,
                 idOrigem: '',
                 idDestino: '',
@@ -26,14 +27,16 @@ export default {
             idClienteSelecionado: null,
             listaDeClientes: [],
 
-            origemSelecionado: null,
+            idProdutoSelecionado: null,
+            listaDeProdutos: [],
+
+            idOrigemSelecionado: null,
             listaDeOrigens: [],
 
-            destinoSelecionado: null,
+            idDestinoSelecionado: null,
             listaDeDestinos: [],
 
-            produtoSelecionado: null,
-            listaDeProdutos: [],
+
 
             unidadeDeMedidaSelecionado: null,
             listaDeUnidadeDeMedida: [ 'CAIXA', 'KG', 'TONELADA', 'LITRO', 'UNIDADE' ],
@@ -44,6 +47,7 @@ export default {
             dialog: false,
             search: '',
             headers: [
+                { text: "Instrucao", value: "instrucao" },
                 { text: "Status", value: "statusPedido" },
                 { text: "Cliente", value: "cliente" },
                 { text: "Produto", value: "produto" },
@@ -120,6 +124,10 @@ export default {
                     this.id = this.pedido.id
                     this.edicao = true
                     this.idClienteSelecionado = this.pedido.cliente.id
+                    this.idProdutoSelecionado = this.pedido.produto.id
+                    this.idOrigemSelecionado = this.pedido.origem.id
+                    this.idDestinoSelecionado = this.pedido.destino.id
+
 
                     console.log(this.edicao)
 
